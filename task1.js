@@ -1,19 +1,25 @@
-let slow = x => {
+// 1;
+function spy(func) {
+	function wrapper(...args) {
+		wrapper.calls.push(args);
+		return func.apply(this, args);
+	}
+	wrapper.calls = [];
+
+	return wrapper;
+}
+// 2;
+function f(x) {
 	console.log(x);
-	return x;
-};
+}
 
-const cachingDecorator = func => {
-	const cache = new Map();
-
+function delay(func, ms) {
 	return function (...x) {
-		if (cache.has(x)) {
-			return cache.get(x);
-		}
-		const result = func(...x);
-		cache.set(x, result);
+		setTimeout(() => {
+			func.apply(this, x);
+		}, ms);
 	};
-};
+}
 
-slow = cachingDecorator(slow);
-console.log(slow(1));
+let f1000 = delay(f, 2000);
+f1000('1000');
