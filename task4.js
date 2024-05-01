@@ -1,23 +1,12 @@
-let amimal = {
-	name: 'Slaves',
-	walk() {
-		console.log(`${this.name} is walking`);
-	},
+let animal = {
+	eats: true,
 };
 
-let rabbit = {
-	__proto__: amimal,
-	name: 'White Rabbit',
-	eat() {
-		console.log(`${this.name} is eating`);
-	},
-};
+function Rabbit(name) {
+	this.name = name;
+}
 
-let longEar = {
-	__proto__: rabbit,
-	earLength: 20,
-};
+Rabbit.prototype = animal;
 
-longEar.eat();
-
-// true,null, undefined
+let rabbit = new Rabbit('White Rabbit');
+console.log(rabbit.eats);
