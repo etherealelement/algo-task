@@ -1,4 +1,12 @@
-let dictionary = Object.create(null);
+//
+
+let dictionary = Object.create(null, {
+	toString: {
+		value() {
+			return Object.keys(this).join(',');
+		},
+	},
+});
 
 // ваш код, который добавляет метод dictionary.toString
 
@@ -7,9 +15,8 @@ dictionary.apple = 'Apple';
 dictionary.__proto__ = 'test'; // здесь __proto__ -- это обычный ключ
 
 // только apple и __proto__ выведены в цикле
-for (let key in dictionary) {
-	alert(key); // "apple", затем "__proto__"
-}
+// for(let key in dictionary) {
+//   console.log(key);
+// }
 
-// ваш метод toString в действии
-alert(dictionary); // "apple,__proto__"
+console.log(dictionary.toString());
